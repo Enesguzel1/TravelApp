@@ -1,9 +1,12 @@
 import { View, Image, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
-
+import React,{useState} from 'react';
 import { Link,router } from 'expo-router';
+import { firebase } from '../config';
 
 
 export default function Page() {
+  const [mail, setMail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.container}> 
       <Image
@@ -14,13 +17,15 @@ export default function Page() {
       <TextInput
         style={styles.input}
         placeholder="E-posta"
+        onChangeText={text => setMail(text)}
       />
       <TextInput
         style={styles.input}
         placeholder="Şifre"
+        onChangeText={text=>setPassword(text)}
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.button} onPress={x=x=>Route('main')}>
+      <TouchableOpacity style={styles.button} onPress={x=x=>LogInUser(mail,password)}>
         <Text style={styles.buttonText}>Giriş Yap</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={x=x=>Route('forgotPassword')}>
@@ -35,6 +40,14 @@ export default function Page() {
 
 function Route(path){
   router.push(path);
+}
+const LogInUser=async(mail,pass)=>{
+  try{
+    await firebase.auth().signInWithEmailAndPassword(mail,pass);
+    Route('main');
+  }catch(error){
+    alert(error);
+  }
 }
 
 const styles = StyleSheet.create({
