@@ -1,6 +1,7 @@
 import { View, TextInput, TouchableOpacity, Text, StyleSheet,Image } from 'react-native';
 
 import { Link,router } from 'expo-router';
+import { Route } from 'expo-router/build/Route';
 
 
 export default function RegisterScreen() {
@@ -28,12 +29,15 @@ export default function RegisterScreen() {
       </TouchableOpacity>
       <View style={styles.login}>
         <Text style={styles.loginText}>Zaten bir hesabınız var mı?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={x=x=>Route1('index')}>
           <Text style={styles.loginLink}>Giriş Yapın</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
+}
+function Route1(path){
+  router.push(path)
 }
 
 const styles = StyleSheet.create({

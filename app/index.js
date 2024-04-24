@@ -10,6 +10,7 @@ export default function Page() {
         source={require('../assets/logo1.png')}
         style={styles.logo}
       />
+      <Text style={styles.welcome}> Hoşgeldiniz! </Text>
       <TextInput
         style={styles.input}
         placeholder="E-posta"
@@ -19,11 +20,11 @@ export default function Page() {
         placeholder="Şifre"
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={x=x=>Route('main')}>
         <Text style={styles.buttonText}>Giriş Yap</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.forgotPassword} onPress={x=x=>Route('forgotPassword')}>
-        <Text>Şifremi Unuttum</Text>
+      <TouchableOpacity style={styles.button} onPress={x=x=>Route('forgotPassword')}>
+        <Text style={{color:'white'}}>Şifremi Unuttum</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.register} onPress={x=x=>Route('register')}>
         <Text>Hesabın Yok mu? Kayıt Ol</Text>
@@ -42,6 +43,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+  },
+  welcome:{
+    fontWeight:'bold',
+    fontSize:25,
+    marginBottom:20
   },
   logo: {
     width: 150,

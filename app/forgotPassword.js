@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import React from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet,Image } from 'react-native';
 
@@ -17,12 +18,17 @@ export default function forgotPassword(){
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Şifre Sıfırla</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.backToLogin}>
-        <Text style={styles.backToLoginText}>Giriş Ekranına Geri Dön</Text>
+      <TouchableOpacity style={styles.backToLogin} onPress={()=>{
+        router.back();
+      }}>
+        <Text style={{color:'white'}}>Giriş Ekranına Geri Dön</Text>
       </TouchableOpacity>
     </View>
   );
 };
+function Route(path){
+  router.push(path);
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -63,6 +69,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   backToLogin: {
+    backgroundColor:'blue',
+    borderRadius:5,
+    padding:10,
+    fontWeight:'bold',
     marginBottom: 20,
   },
   backToLoginText: {
