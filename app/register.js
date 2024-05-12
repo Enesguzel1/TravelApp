@@ -1,10 +1,11 @@
 import { View, TextInput, TouchableOpacity, Text, StyleSheet,Image } from 'react-native';
-
+import React,{useState} from 'react';
 import { Link,router } from 'expo-router';
-import { Route } from 'expo-router/build/Route';
-
+import axios from 'axios';
 
 export default function RegisterScreen() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.container}>
       <Image
@@ -13,25 +14,23 @@ export default function RegisterScreen() {
       />
       <TextInput
         style={styles.input}
-        placeholder="Adınız"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="E-posta"
+        placeholder="Kullanıcı Adı"
+        onChangeText={text => setUsername(text)}
       />
       <TextInput
         style={styles.input}
         placeholder="Şifre"
+        onChangeText={text => setPassword(text)}
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} on onPress={x=x=>registerUser(username,password)}>
         <Text style={styles.buttonText}>Kayıt Ol</Text>
       </TouchableOpacity>
       <View style={styles.login}>
         <Text style={styles.loginText}>Zaten bir hesabınız var mı?</Text>
-        <TouchableOpacity onPress={x=x=>Route1('index')}>
-          <Text style={styles.loginLink}>Giriş Yapın</Text>
-        </TouchableOpacity>
+          <Link href="index">
+            <Text style={styles.loginLink}>Giriş Yapın</Text>
+          </Link>
       </View>
     </View>
   );
@@ -39,6 +38,23 @@ export default function RegisterScreen() {
 function Route1(path){
   router.push(path)
 }
+const registerUser = async (username, pass) => {
+  try {
+    const response = await axios.post(`https://e8d5-5-47-162-108.ngrok-free.app/api/User/CreateUser?username=${username}&password=${pass}`);
+    if (response.data === "success") {
+      Route('index');
+    } else {
+      alert(response.data);
+    }
+  } catch (error) {
+    if (error.response.status === 409) {
+      alert("Username already exists");
+    } else {
+      alert(error.message);
+    }
+  }
+}
+
 
 const styles = StyleSheet.create({
   container: {

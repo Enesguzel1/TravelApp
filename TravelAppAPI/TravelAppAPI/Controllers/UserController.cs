@@ -19,20 +19,47 @@ namespace TravelAppAPI.Controllers
 
 	
 
-		[HttpPost]
-		public async Task<IActionResult> CreateUser(User user)
+		[HttpPost("CreateUser")]
+		public async Task<IActionResult> CreateUser(string username,string password)
 		{
-			_userRepository.CreateUser(user);
-			return Ok("Eklendi");
-		}
+            
+			string result = await _userRepository.CreateUser(username,password);
+            if (result == "success")
+            {
+                return Ok("User created successfully");
+            }
+            else if (result == "Username already exists")
+            {
+                return Conflict("Username already exists");
+            }
+            else
+            {
+                return StatusCode(500, "Error occurred while creating user");
+            }
+        }
 
 
-		[HttpGet]
-		public async Task<IActionResult> GetUserList()
-		{
-			var values = await _userRepository.GetUsers();
-			return Ok(values);
-		}
+        [HttpGet("Login")]
+        public async Task<IActionResult> Login(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                return BadRequest("Kullanıcı adı ve şifre gereklidir.");
+            }
+            var loginResult = await _userRepository.Login(username, password);
 
-	}	
+            if (loginResult == "success")
+            {
+                var userList = await _userRepository.Login(username,password);
+                return Ok("success");
+            }
+            else
+            {
+                return Unauthorized("Geçersiz kullanıcı adı veya şifre.");
+            }
+        }
+
+
+
+    }
 }

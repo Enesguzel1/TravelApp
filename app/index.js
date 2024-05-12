@@ -1,11 +1,12 @@
 import { View, Image, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import React,{useState} from 'react';
 import { Link,router } from 'expo-router';
-import { firebase } from '../config';
+import axios from 'axios';
+
 
 
 export default function Page() {
-  const [mail, setMail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   return (
     <View style={styles.container}> 
@@ -16,8 +17,8 @@ export default function Page() {
       <Text style={styles.welcome}> Hoşgeldiniz! </Text>
       <TextInput
         style={styles.input}
-        placeholder="E-posta"
-        onChangeText={text => setMail(text)}
+        placeholder="Kullanıcı Adı"
+        onChangeText={text => setUsername(text)}
       />
       <TextInput
         style={styles.input}
@@ -25,7 +26,7 @@ export default function Page() {
         onChangeText={text=>setPassword(text)}
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.button} onPress={x=x=>LogInUser(mail,password)}>
+      <TouchableOpacity style={styles.button} onPress={x=x=>LogInUser(username,password)}>
         <Text style={styles.buttonText}>Giriş Yap</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={x=x=>Route('forgotPassword')}>
@@ -34,6 +35,10 @@ export default function Page() {
       <TouchableOpacity style={styles.register} onPress={x=x=>Route('register')}>
         <Text>Hesabın Yok mu? Kayıt Ol</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={x=x=>Deneme()}>
+        <Text>Veri için Tıkla</Text>
+      </TouchableOpacity>
+
     </View>
   );
 }
@@ -41,10 +46,16 @@ export default function Page() {
 function Route(path){
   router.push(path);
 }
-const LogInUser=async(mail,pass)=>{
+
+const LogInUser=async(username,pass)=>{
   try{
-    await firebase.auth().signInWithEmailAndPassword(mail,pass);
-    Route('main');
+    // https://localhost:44317/api/User/Login?username=mustafa&password=tortuk
+    const response = await axios.get("https://e8d5-5-47-162-108.ngrok-free.app/api/User/Login?username="+username+"&password="+pass)
+    if(response.data=="success"){
+      Route('main')
+    }else{
+      alert("Kullanıcı Adı veya Şifre Hatalı");
+    }
   }catch(error){
     alert(error);
   }

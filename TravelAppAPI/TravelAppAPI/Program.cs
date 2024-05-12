@@ -1,11 +1,15 @@
 using TravelAppAPI.Models.TravelApp;
 using TravelAppAPI.Repositories.UserRepository;
+using TravelAppAPI.Repositories.CityRepository;
+using TravelAppAPI.Repositories.PlacesRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddTransient<Context>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<ICityRepository, CityRepository>();
+builder.Services.AddTransient<IPlaceRepository, PlaceRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -4,8 +4,8 @@ namespace TravelAppAPI.Repositories.UserRepository
 {
     public interface IUserRepository
     {
-		Task<List<User>> GetUsers();
-		public void CreateUser(User user);
+		Task<string> Login(string username,string password);
+		public Task<string> CreateUser(string username,string password);
 
 
 	}
