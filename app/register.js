@@ -2,6 +2,7 @@ import { View, TextInput, TouchableOpacity, Text, StyleSheet,Image } from 'react
 import React,{useState} from 'react';
 import { Link,router } from 'expo-router';
 import axios from 'axios';
+const {apiUrl}=require('../config')
 
 export default function RegisterScreen() {
   const [username, setUsername] = useState('');
@@ -28,7 +29,7 @@ export default function RegisterScreen() {
       </TouchableOpacity>
       <View style={styles.login}>
         <Text style={styles.loginText}>Zaten bir hesabınız var mı?</Text>
-          <Link href="index">
+          <Link href='/'>
             <Text style={styles.loginLink}>Giriş Yapın</Text>
           </Link>
       </View>
@@ -36,13 +37,13 @@ export default function RegisterScreen() {
   );
 }
 function Route1(path){
-  router.push(path)
+  router.replace(path)
 }
 const registerUser = async (username, pass) => {
   try {
-    const response = await axios.post(`https://e8d5-5-47-162-108.ngrok-free.app/api/User/CreateUser?username=${username}&password=${pass}`);
+    const response = await axios.post(apiUrl+`api/User/CreateUser?username=${username}&password=${pass}`);
     if (response.data === "success") {
-      Route('index');
+      Route1('/');
     } else {
       alert(response.data);
     }

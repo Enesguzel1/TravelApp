@@ -2,7 +2,7 @@ import { View, Image, TextInput, TouchableOpacity, Text, StyleSheet } from 'reac
 import React,{useState} from 'react';
 import { Link,router } from 'expo-router';
 import axios from 'axios';
-
+const {apiUrl}=require('../config')
 
 
 export default function Page() {
@@ -50,7 +50,7 @@ function Route(path){
 const LogInUser=async(username,pass)=>{
   try{
     // https://localhost:44317/api/User/Login?username=mustafa&password=tortuk
-    const response = await axios.get("https://e8d5-5-47-162-108.ngrok-free.app/api/User/Login?username="+username+"&password="+pass)
+    const response = await axios.get(apiUrl+"api/User/Login?username="+username+"&password="+pass)
     if(response.data=="success"){
       Route('main')
     }else{

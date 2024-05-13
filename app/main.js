@@ -4,14 +4,13 @@ import { Link,router } from 'expo-router';
 
 const MainScreen = ({ navigation }) => {
   const cities = ['Adana', 'İzmir', 'Muğla', 'Aydın', 'İstanbul','Çanakkale','Bursa','Edirne'];
-
   const handleCityPress = (city) => {
     router.push(city);
   };
 
   const renderCityItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleCityPress(item)}>
-      <View style={{ padding: 20, borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
+      <View style={{ padding: 20, borderBottomWidth: 1, borderBottomColor: 'purple'}}>
         <Text>{item}</Text>
       </View>
     </TouchableOpacity>
