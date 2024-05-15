@@ -28,10 +28,11 @@ const App = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Image source={require('C:\Users\enesg\OneDrive\Masaüstü\berna.jpg')} style={styles.image} />
+      <Image source={"laejfnaekjfn"} style={styles.image} />
       <Text style={styles.title}>{item.place_name}</Text>
       <Text style={styles.description}>{item.place_description}</Text>
       <Text style={styles.location}>{item.place_location}</Text>
+      
     </View>
   );
 
