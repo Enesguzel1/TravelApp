@@ -35,9 +35,6 @@ export default function Page() {
       <TouchableOpacity style={styles.register} onPress={x=x=>Route('register')}>
         <Text>Hesabın Yok mu? Kayıt Ol</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={x=x=>Deneme()}>
-        <Text>Veri için Tıkla</Text>
-      </TouchableOpacity>
 
     </View>
   );
@@ -49,7 +46,6 @@ function Route(path){
 
 const LogInUser=async(username,pass)=>{
   try{
-    // https://localhost:44317/api/User/Login?username=mustafa&password=tortuk
     const response = await axios.get(apiUrl+"api/User/Login?username="+username+"&password="+pass)
     if(response.data=="success"){
       Route('main')
