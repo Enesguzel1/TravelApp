@@ -26,7 +26,7 @@ namespace TravelAppAPI.Controllers
 			string result = await _userRepository.CreateUser(username,password);
             if (result == "success")
             {
-                return Ok("User created successfully");
+                return Ok("success");
             }
             else if (result == "Username already exists")
             {

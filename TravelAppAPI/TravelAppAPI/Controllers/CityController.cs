@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Nodes;
 using TravelAppAPI.Entities;
 using TravelAppAPI.Repositories.CityRepository;
 
@@ -20,7 +21,7 @@ namespace TravelAppAPI.Controllers
         public async Task<List<City>> GetCities()
         {
             var list = await cityRepository.GetAllCity();
-            return list;
+            return list.ToList();
         }
     }
 }

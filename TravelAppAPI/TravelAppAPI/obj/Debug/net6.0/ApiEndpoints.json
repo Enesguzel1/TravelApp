@@ -20,9 +20,35 @@
     ]
   },
   {
+    "ContainingType": "TravelAppAPI.Controllers.FoodController",
+    "Method": "GetFood",
+    "RelativePath": "api/Food/GetFoodByCity",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[TravelAppAPI.Entities.Food, TravelAppAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "TravelAppAPI.Controllers.PlaceController",
     "Method": "GetAllPlaces",
-    "RelativePath": "api/Place",
+    "RelativePath": "api/Place/GetPlacesById",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -86,5 +112,31 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TravelAppAPI.Controllers.WordController",
+    "Method": "GetWords",
+    "RelativePath": "api/Word/GetWordsByCity",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[TravelAppAPI.Entities.Word, TravelAppAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

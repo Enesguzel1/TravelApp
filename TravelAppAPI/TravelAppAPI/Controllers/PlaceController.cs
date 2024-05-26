@@ -16,7 +16,7 @@ namespace TravelAppAPI.Controllers
             _placesRepository = placesRepository;
         }
 
-        [HttpGet]
+        [HttpGet("GetPlacesById")]
         public Task<List<PlaceToVisit>> GetAllPlaces(int id)
         {
             var list = _placesRepository.GetPlaceToVisitByID(id);

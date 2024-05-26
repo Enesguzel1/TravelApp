@@ -5,18 +5,18 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
   const params = useLocalSearchParams();
-  const {city_id} = params;
+  const {city_id1} = params;
   const handleOptionPress = (option) => {
     // Seçilen seçeneğe göre yönlendirme işlemi
     switch (option) {
       case 1:
-        router.push({pathname:'places',params:{city_id}});
+        router.push({pathname:'places',params:{city_id:city_id1}});
         break;
       case 2:
-        router.push({pathname:'words',params:{city_id}});
+        router.push({pathname:'words',params:{city_id:city_id1}});
         break;
       case 3:
-        router.push({pathname:'foods',params:{city_id}});
+        router.push({pathname:'foods',params:{city_id:city_id1}});
         break;
       default:
         break;

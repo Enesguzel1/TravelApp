@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import axios from 'axios';
 import { useLocalSearchParams } from 'expo-router';
-const {apiUrl}=require('../config')
+const {apiUrl}=require('../config');
 const App = () => {
   const [data, setData] = useState([]);
   const params=useLocalSearchParams;
   const{city_id} = params;
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(apiUrl+'api/Place/GetPlacesById?id=1');
+        const response = await axios.get(apiUrl+'api/Place/GetPlacesById?id='+city_id);
         if(response.data!=null){
             setData(response.data);
         }
@@ -22,13 +21,12 @@ const App = () => {
         alert(error);
       }
     };
-
     fetchData();
   }, []);
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Image source={"laejfnaekjfn"} style={styles.image} />
+      <Image source={{uri:item.place_image_url}} style={styles.image} />
       <Text style={styles.title}>{item.place_name}</Text>
       <Text style={styles.description}>{item.place_description}</Text>
       <Text style={styles.location}>{item.place_location}</Text>

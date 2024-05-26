@@ -21,7 +21,8 @@ const MainScreen = ({ navigation }) => {
   }, []);
 
   const handleCityPress = (path,data) => {
-    router.push({pathname:path,params:{city_id:data}})
+    router.push({pathname:path,params:{city_id1:data}})
+    console.log("burası main ekranı ve id="+data)
   };
 
   const renderCityItem = ({ item }) => (
