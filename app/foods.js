@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet,TouchableOpacity } from 'react-native';
 import axios from 'axios';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams ,router} from 'expo-router';
 const {apiUrl}=require('../config');
 const FoodScreen = () => {
   const [data, setData] = useState([]);
@@ -33,6 +33,9 @@ const FoodScreen = () => {
       <Text style={styles.description}>{item.food_description}</Text>
     </View>
   );
+  const handleGoBack = () => {
+    router.back();
+  };
 
   return (
     <View style={styles.container}>
@@ -41,6 +44,9 @@ const FoodScreen = () => {
         renderItem={renderItem}
         keyExtractor={(item) => item.food_id.toString()}
       />
+      <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+        <Text style={styles.backButtonText}>Geri Dön</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -74,6 +80,17 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     color: '#666',
+  },
+  backButton: {
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#ff6347',
+    borderRadius: 5,
+  },
+  backButtonText: {
+    color: '#fff',
+    fontSize: 18,
   },
 });
 

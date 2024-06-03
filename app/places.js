@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import axios from 'axios';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams,router } from 'expo-router';
 const {apiUrl}=require('../config');
 const App = () => {
   const [data, setData] = useState([]);
-  const params=useLocalSearchParams;
+  const params=useLocalSearchParams();
   const{city_id} = params;
+  const handleGoBack = () => {
+    router.back();
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,6 +44,9 @@ const App = () => {
         renderItem={renderItem}
         keyExtractor={(item) => item.places_to_visit_id.toString()}
       />
+      <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+        <Text style={styles.backButtonText}>Geri Dön</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -79,6 +85,17 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#888',
     marginTop: 5,
+  },
+  backButton: {
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#ff6347',
+    borderRadius: 5,
+  },
+  backButtonText: {
+    color: '#fff',
+    fontSize: 18,
   },
 });
 

@@ -2,25 +2,29 @@ import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-
 const HomeScreen = ({ navigation }) => {
   const params = useLocalSearchParams();
-  const {city_id1} = params;
+  const { city_id1 } = params;
+
   const handleOptionPress = (option) => {
     // Seçilen seçeneğe göre yönlendirme işlemi
     switch (option) {
       case 1:
-        router.push({pathname:'places',params:{city_id:city_id1}});
+        router.push({ pathname: 'places', params: { city_id: city_id1 } });
         break;
       case 2:
-        router.push({pathname:'words',params:{city_id:city_id1}});
+        router.push({ pathname: 'words', params: { city_id: city_id1 } });
         break;
       case 3:
-        router.push({pathname:'foods',params:{city_id:city_id1}});
+        router.push({ pathname: 'foods', params: { city_id: city_id1 } });
         break;
       default:
         break;
     }
+  };
+
+  const handleGoBack = () => {
+    router.back();
   };
 
   return (
@@ -34,6 +38,9 @@ const HomeScreen = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity style={styles.optionButton} onPress={() => handleOptionPress(3)}>
         <Text style={styles.optionText}>Şehrin Ünlü Yemekleri</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+        <Text style={styles.backButtonText}>Geri Dön</Text>
       </TouchableOpacity>
     </View>
   );
@@ -66,6 +73,17 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 20,
     color: '#000',
+  },
+  backButton: {
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#ff6347',
+    borderRadius: 5,
+  },
+  backButtonText: {
+    color: '#fff',
+    fontSize: 18,
   },
 });
 

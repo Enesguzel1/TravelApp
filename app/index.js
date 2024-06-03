@@ -29,9 +29,7 @@ export default function Page() {
       <TouchableOpacity style={styles.button} onPress={x=x=>LogInUser(username,password)}>
         <Text style={styles.buttonText}>Giriş Yap</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={x=x=>Route('forgotPassword')}>
-        <Text style={{color:'white'}}>Şifremi Unuttum</Text>
-      </TouchableOpacity>
+      
       <TouchableOpacity style={styles.register} onPress={x=x=>Route('register')}>
         <Text>Hesabın Yok mu? Kayıt Ol</Text>
       </TouchableOpacity>
